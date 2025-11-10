@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: transparent;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    video {
+      width: 80%;
+      height: auto;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <video id="anim" autoplay muted playsinline preload="auto">
+    <source src="video.webm" type="video/webm">
+  </video>
+
+  <script>
+    const vid = document.getElementById('anim');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          vid.play();
+          observer.unobserve(vid); // проигрывается 1 раз
+        }
+      });
+    });
+    observer.observe(vid);
+  </script>
+</body>
+</html>
